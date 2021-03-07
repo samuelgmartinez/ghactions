@@ -4,7 +4,7 @@
   "description": "github actions training playground",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --reporter spec",
     "build": "npx ncc build"
   },
   "repository": {
@@ -24,6 +24,9 @@
     "glob": "^7.1.6"
   },
   "devDependencies": {
-    "@zeit/ncc": "^0.22.3"
+    "@zeit/ncc": "^0.22.3",
+    "chai": "^4.3.3",
+    "mocha": "^8.3.1",
+    "sinon": "^9.2.4"
   }
 }

@@ -1,34 +1,19 @@
-const fs = require('fs')
 const core = require('@actions/core');
-const github = require('@actions/github');
-const glob = require('glob')
-const Ajv = require('ajv')
-
-const ajv = new Ajv.default({allErrors: true})
+const validator = require('validator')
 
 try {
-  const subjectsPath = core.getInput('subjects-path');
+  const result = validator.validate(core.getInput('subjects-path') + '/**/*.json')
 
-  const files = glob.sync(subjectsPath + '/**/*.json')
-    .map(schemaPath => {
-      console.log(`Validating schema definition: ${schemaPath}`);
-      return JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
-    })
-    .forEach(schema => ajv.addSchema(schema));
-  
+  core.setOutput('parsed-schemas', result.parsedSchemas);
 
-  /*
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-  
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
+  if (result.successfulSchemas.length) {
+    core.setOutput('successful-schemas', result.successfulSchemas);
+  }
 
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
-  */
+  if (result.failedSchemas.length) {
+    core.setFailed("Some json schema validations have failed. See the logs for more information.");
+    core.setOutput('failed-schemas', result.failedSchemas);
+  }
 } catch (error) {
   core.setFailed(error.message);
 }
