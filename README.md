@@ -9,9 +9,8 @@ After each merge, this project will build the actions into a single file distrib
 
 ## Available actions
 
-* [schema-publisher-action](./schema-publisher-action/): This action publishes the modified subjects to Ceph.
-* [schema-validator-action](./validate-schema-action/): This action validates the JSON schemas in specification and format.
-
+* [schema-publisher-action](./packages/schema-publisher-action/): This action publishes the modified subjects to Ceph.
+* [schema-validator-action](./packages/validate-schema-action/): This action validates the JSON schemas in specification and format.
 
 ## How to build and test the actions
 
