@@ -1,5 +1,4 @@
-const core = require('@actions/core');
-const publisher = require('./publisher');
+const publisher = require('../publisher');
 
 const environments = {
   'local': {
@@ -26,11 +25,11 @@ const environments = {
 
 async function run() {
   try {
-    const env = core.getInput('environment')
-    const tenant = core.getInput('tenant');
+    const env = 'des'
+    const tenant = 'za';
     const s3env = environments[env];
 
-    const path = core.getInput('subjects-path')
+    const path = ''
     const pathExpr = `${process.cwd()}/${path}/${tenant}/**/*.json`
 
     if (!(env  in environments)) {
@@ -40,17 +39,15 @@ async function run() {
 
     console.log(`Publishing subjects in ${env} for tenant ${tenant} using ${pathExpr} expression...`);
 
-    console.log('Credentials: ' + core.getInput(`${env}-access-key`) + ' - ' + core.getInput(`${env}-secret-key`));
-
     const s3config = {
-      accessKey: core.getInput(`${env}-access-key`),
-      secretKey: core.getInput(`${env}-secret-key`),
+      accessKey: 'access',
+      secretKey: 'secret',
       baseUrl: s3env.baseUrl,
       bucket: s3env.bucketName,
       basePath: s3env.basePath
     }
 
-    await publisher.publish(pathExpr, s3config, core.getInput('owner'), core.getInput('force') == 'true');
+    await publisher.publish(pathExpr, s3config, 'theowner', true);
   } catch (error) {
     core.setFailed(error.message);
   }
