@@ -2282,7 +2282,10 @@ const validator = __webpack_require__(30)
 
 async function run() {
   try {
-    const result = validator.validate(core.getInput('subjects-path') + '/**/*.json')
+    const path = core.getInput('subjects-path')
+    console.log(`Validating subjects using ${path}...`);
+
+    const result = validator.validate(path + '/**/*.json')
 
     core.setOutput('parsed-schemas', result.parsedSchemas);
 
