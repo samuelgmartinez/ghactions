@@ -4,10 +4,10 @@ const validator = require('./validator')
 async function run() {
   try {
     const path = core.getInput('subjects-path')
-    console.log(`Validating subjects using ${path}...`);
-    console.log(`Reading from ${process.cwd()}`)
+    const pathExpr = `${process.cwd()}/${path}/**/*.json`
+    console.log(`Validating subjects using ${pathExpr} expression...`);
 
-    const result = validator.validate(`${process.cwd()}/${path}/**/*.json`)
+    const result = validator.validate(pathExpr)
 
     core.setOutput('parsed-schemas', result.parsedSchemas);
 
@@ -20,6 +20,7 @@ async function run() {
       core.setOutput('failed-schemas', result.failedSchemas);
     }
   } catch (error) {
+    console.log(`An error occurred: ${error.message}`);
     core.setFailed(error.message);
   }
 }
