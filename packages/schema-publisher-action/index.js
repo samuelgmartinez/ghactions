@@ -30,6 +30,15 @@ async function run() {
     const tenant = core.getInput('tenant');
     const s3env = environments[env];
 
+    const path = core.getInput('subjects-path')
+    const pathExpr = `${process.cwd()}/${path}/${tenant}/**/*.json`
+
+    if (!(env  in environments)) {
+      core.setFailed(`Specified env ${env} is not a valid value. Please refer to the documentation for the valid environment values`);
+    }
+
+    console.log(`Publishing subjects in ${env} for tenant ${tenant} using ${pathExpr} expression...`);
+
     const s3config = {
       accessKey: core.getInput(`${env}-access-key`),
       secretKey: core.getInput(`${env}-secret-key`),
@@ -37,10 +46,6 @@ async function run() {
       bucket: s3env.bucketName,
       basePath: s3env.basePath
     }
-
-    const path = core.getInput('subjects-path')
-    const pathExpr = `${process.cwd()}/${path}/${tenant}/**/*.json`
-    console.log(`Publishing subjects using ${pathExpr} expression...`);
 
     return publisher.publish(core.getInput('subjects-path') + '/**/*.json', 
       s3config, core.getInput('owner'), core.getInput('force') == 'true');

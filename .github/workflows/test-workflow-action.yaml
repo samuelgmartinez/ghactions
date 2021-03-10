@@ -1,5 +1,13 @@
 name: "test-workflow"
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      tenant:
+        description: Environment id where the schema is deployed.
+        required: true
+      environment:
+        description: Tenant for which the schemas will be deployed
+        required: true
 
 jobs:
   test-workflow:
@@ -19,4 +27,5 @@ jobs:
         uses: ./packages/schema-publisher-action
         with:
           subjects-path: './packages/schema-publisher-action/test-data/complex-valid-subjects'
-          tenant: za
+          tenant: '${{ github.event.inputs.tenant }}'
+          environment: '${{ github.event.inputs.environment }}'
