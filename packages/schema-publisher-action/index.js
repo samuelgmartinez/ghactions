@@ -35,6 +35,7 @@ async function run() {
 
     if (!(env  in environments)) {
       core.setFailed(`Specified env ${env} is not a valid value. Please refer to the documentation for the valid environment values`);
+      return;
     }
 
     console.log(`Publishing subjects in ${env} for tenant ${tenant} using ${pathExpr} expression...`);

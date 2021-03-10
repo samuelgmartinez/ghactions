@@ -2,10 +2,10 @@ name: "test-workflow"
 on: 
   workflow_dispatch:
     inputs:
-      tenant:
+      environment:
         description: Environment (des, preint, pre, protest, pro)
         required: true
-      environment:
+      tenant:
         description: Tenant (bk, lf, md, oy, pb, st, ut, za, zh)
         required: true
 
