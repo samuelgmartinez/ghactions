@@ -11,7 +11,7 @@ inputs:
   owner:
     description: 'Repository identifier running the action'
     reuired: false,
-    default: '${{ env.GITHUB_REPOSITORY }}'
+    default: '${{ github.repository }}'
   force:
     description: 'Flag that indicates that the subject will be overriden even when this repositority is not the owner.'
     required: false,
@@ -34,7 +34,7 @@ inputs:
   dev-secret-key:
     description: 'Ceph secret key for the dev environment'
     required: false
-    default: '${{ secrets.DES_LIBDATAX_ACCESSKEY }}'
+    default: '${{ secrets.DES_LIBDATAX_SECRETKEY }}'
   preint-access-key:
     description: 'Ceph access key for the preint environment'
     required: false
@@ -42,7 +42,7 @@ inputs:
   preint-secret-key:
     description: 'Ceph secret key for the preint environment'
     required: false
-    default: '${{ secrets.PREINT_LIBDATAX_ACCESSKEY }}'
+    default: '${{ secrets.PREINT_LIBDATAX_SECRETKEY }}'
   pre-access-key:
     description: 'Ceph access key for the pre environment'
     required: false
@@ -50,7 +50,7 @@ inputs:
   pre-secret-key:
     description: 'Ceph secret key for the pre environment'
     required: false
-    default: '${{ secrets.PRE_LIBDATAX_ACCESSKEY }}'
+    default: '${{ secrets.PRE_LIBDATAX_SECRETKEY }}'
 runs:
   using: 'node12'
   main: 'dist/index.js'
