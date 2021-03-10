@@ -2,7 +2,7 @@ name: 'APISubjectValidator'
 description: 'Validates the existing JSON Schemas in form and spec'
 inputs:
   subjects-path:  # id of input
-    description: 'Repository root path where the subject's json schema are stored'
+    description: 'Repository root path where the subject json schemas are stored'
     required: true
     default: '.'
 outputs:
