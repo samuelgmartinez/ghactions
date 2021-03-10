@@ -2,7 +2,7 @@ name: 'APISubjectPublisher'
 description: 'Publishes the existing JSON schemas to Ceph'
 inputs:
   subjects-path:  
-    description: 'Repository root path where the subject's json schema are stored'
+    description: 'Repository root path where the subject json schemas are stored'
     required: false
     default: './dataext'
   environment:
