@@ -4,13 +4,9 @@ const AWS = require('aws-sdk');
 const glob = require('glob')
 
 module.exports.publish = async (pathExpression, s3config, owner, force) => {
-  const credentials = {
+  const s3client = new AWS.S3({
     accessKeyId: s3config.accessKey,
     secretAccessKey: s3config.secretKey,
-  }
-
-  const s3client = new AWS.S3({
-    credentials,
     endpoint: s3config.baseUrl,
     s3ForcePathStyle: true
   });

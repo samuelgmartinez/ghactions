@@ -48,7 +48,7 @@ async function run() {
       basePath: s3env.basePath
     }
 
-    return publisher.publish(core.getInput('subjects-path') + '/**/*.json', 
+    await publisher.publish(core.getInput('subjects-path') + '/**/*.json', 
       s3config, core.getInput('owner'), core.getInput('force') == 'true');
   } catch (error) {
     core.setFailed(error.message);
