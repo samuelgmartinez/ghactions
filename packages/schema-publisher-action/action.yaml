@@ -27,10 +27,10 @@ inputs:
     description: 'Ceph secret key for the local environment'
     required: true
     default: 'any-secret-token'
-  dev-access-key:
+  des-access-key:
     description: 'Ceph access key for the dev environment'
     required: true
-  dev-secret-key:
+  des-secret-key:
     description: 'Ceph secret key for the dev environment'
     required: true
   preint-access-key:
