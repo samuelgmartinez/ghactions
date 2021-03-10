@@ -1,0 +1,53 @@
+name: 'APISubjectPublisher'
+description: 'Publishes the existing JSON schemas to Ceph'
+inputs:
+  subjects-path:  # id of input
+    description: 'Repository root path where the subject's json schema are stored'
+    required: false
+    default: './dataext'
+  local-access-key:
+    description: 'Ceph access key for the local environment'
+    required: false
+    default: 'any-access-token'
+  local-secret-key:
+    description: 'Ceph secret key for the local environment'
+    required: false
+    default: 'any-secret-token'
+  dev-access-key:
+    description: 'Ceph access key for the dev environment'
+    required: false
+    default: '${{ secrets.DES_LIBDATAX_ACCESSKEY }}'
+  dev-secret-key:
+    description: 'Ceph secret key for the dev environment'
+    required: false
+    default: '${{ secrets.DES_LIBDATAX_ACCESSKEY }}'
+  preint-access-key:
+    description: 'Ceph access key for the preint environment'
+    required: false
+    default: '${{ secrets.PREINT_LIBDATAX_ACCESSKEY }}'
+  preint-secret-key:
+    description: 'Ceph secret key for the preint environment'
+    required: false
+    default: '${{ secrets.PREINT_LIBDATAX_ACCESSKEY }}'
+  pre-access-key:
+    description: 'Ceph access key for the pre environment'
+    required: false
+    default: '${{ secrets.PRE_LIBDATAX_ACCESSKEY }}'
+  pre-secret-key:
+    description: 'Ceph secret key for the pre environment'
+    required: false
+    default: '${{ secrets.PRE_LIBDATAX_ACCESSKEY }}'
+  environment:
+    description: 'Environment id where the schema is deployed'
+    required: true
+  owner:
+    description: 'Repository identfier running the action'
+    reuired: false,
+    default: '${{ env.GITHUB_REPOSITORY }}'
+  force:
+    description: 'Flag that indicates that the subject will be overriden even when this repositority is not the owner.'
+    required: false,
+    default: 'false'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

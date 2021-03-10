@@ -1,0 +1,17 @@
+name: "test-workflow"
+on: workflow_dispatch
+
+jobs:
+  test-workflow:
+    env:
+      GITHUB_REPOSITORY: 'extensionlib'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Verify Subjects
+        uses: ./packages/validate-schema-action
+        with:
+          subjects-path: './packages/test-data/complex-valid-schemas'

@@ -1,4 +1,4 @@
-name: 'Validate Subjects JSON schema'
+name: 'APISubjectValidator'
 description: 'Validates the existing JSON Schemas in form and spec'
 inputs:
   subjects-path:  # id of input
@@ -14,4 +14,4 @@ outputs:
     description: Subject files failed to be verified
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
