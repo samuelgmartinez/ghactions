@@ -1,10 +1,24 @@
 name: 'APISubjectPublisher'
 description: 'Publishes the existing JSON schemas to Ceph'
 inputs:
-  subjects-path:  # id of input
+  subjects-path:  
     description: 'Repository root path where the subject's json schema are stored'
     required: false
     default: './dataext'
+  environment:
+    description: 'Environment id where the schema is deployed'
+    required: true
+  owner:
+    description: 'Repository identifier running the action'
+    reuired: false,
+    default: '${{ env.GITHUB_REPOSITORY }}'
+  force:
+    description: 'Flag that indicates that the subject will be overriden even when this repositority is not the owner.'
+    required: false,
+    default: 'false'
+  tenant:
+    description: 'Tenant for which the schemas will be deployed'
+    required: true
   local-access-key:
     description: 'Ceph access key for the local environment'
     required: false
@@ -37,17 +51,6 @@ inputs:
     description: 'Ceph secret key for the pre environment'
     required: false
     default: '${{ secrets.PRE_LIBDATAX_ACCESSKEY }}'
-  environment:
-    description: 'Environment id where the schema is deployed'
-    required: true
-  owner:
-    description: 'Repository identfier running the action'
-    reuired: false,
-    default: '${{ env.GITHUB_REPOSITORY }}'
-  force:
-    description: 'Flag that indicates that the subject will be overriden even when this repositority is not the owner.'
-    required: false,
-    default: 'false'
 runs:
   using: 'node12'
   main: 'dist/index.js'

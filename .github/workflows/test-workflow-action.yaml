@@ -15,3 +15,8 @@ jobs:
         uses: ./packages/validate-schema-action
         with:
           subjects-path: './packages/validate-schema-action/test-data/complex-valid-subjects'
+      - name: Publish Subjects
+        uses: ./packages/schema-publisher-action
+        with:
+          subjects-path: './packages/schema-publisher-action/test-data/complex-valid-subjects'
+          tenant: za
