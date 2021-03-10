@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
     inputs:
       tenant:
-        description: Environment id where the schema is deployed.
+        description: Environment (des, preint, pre, protest, pro)
         required: true
       environment:
-        description: Tenant for which the schemas will be deployed
+        description: Tenant (bk, lf, md, oy, pb, st, ut, za, zh)
         required: true
 
 jobs:
