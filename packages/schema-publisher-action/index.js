@@ -5,7 +5,7 @@ const environments = {
   'local': {
     baseUrl: 'http://localhost:4572',
     bucketName: 'demo-bucket',
-    basePath: '/'
+    basePath: '/local'
   },
   'des': {
     baseUrl: 'http://localhost:4572',
@@ -20,23 +20,28 @@ const environments = {
   'preint': {
     baseUrl: 'http://localhost:4572',
     bucketName: 'demo-bucket',
-    basePath: '/pre'
+    basePath: '/preint'
   }
 }
 
 async function run() {
-  const env = core.getInput('environment')
-  const s3env = environments[env];
+  try {
+    const env = core.getInput('environment')
+    const s3env = environments[env];
 
-  const s3config = {
-    accessKey: core.getInput(`${env}-access-key`),
-    secretKey: core.getInput(`${env}-secret-key`),
-    baseUrl: s3env.baseUrl,
-    bucket: s3env.bucketName,
-    basePath: s3env.basePath
+    const s3config = {
+      accessKey: core.getInput(`${env}-access-key`),
+      secretKey: core.getInput(`${env}-secret-key`),
+      baseUrl: s3env.baseUrl,
+      bucket: s3env.bucketName,
+      basePath: s3env.basePath
+    }
+
+    return publisher.publish(core.getInput('subjects-path') + '/**/*.json', 
+      s3config, core.getInput('owner'), core.getInput('force') == 'true');
+  } catch (error) {
+    core.setFailed(error.message);
   }
-
-  await publisher.publish(core.getInput('subjects-path') + '/**/*.json', s3config, core.getInput('owner'), core.getInput('force') == 'true');
 }
 
 run();
