@@ -2286,7 +2286,7 @@ async function run() {
     console.log(`Validating subjects using ${path}...`);
     console.log(`Reading from ${process.cwd()}`)
 
-    const result = validator.validate(path + '/**/*.json')
+    const result = validator.validate(`${process.cwd()}/${path}/**/*.json`)
 
     core.setOutput('parsed-schemas', result.parsedSchemas);
 
