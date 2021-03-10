@@ -5,6 +5,7 @@ async function run() {
   try {
     const path = core.getInput('subjects-path')
     console.log(`Validating subjects using ${path}...`);
+    console.log(`Reading from ${process.cwd()}`)
 
     const result = validator.validate(path + '/**/*.json')
 
