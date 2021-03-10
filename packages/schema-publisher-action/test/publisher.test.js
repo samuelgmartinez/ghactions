@@ -26,10 +26,10 @@ const environments = {
 async function run() {
   try {
     const env = 'des'
-    const tenant = 'za';
+    const tenant = 'bk';
     const s3env = environments[env];
 
-    const path = ''
+    const path = './test-data/complex-valid-subjects'
     const pathExpr = `${process.cwd()}/${path}/${tenant}/**/*.json`
 
     if (!(env  in environments)) {
@@ -49,7 +49,7 @@ async function run() {
 
     await publisher.publish(pathExpr, s3config, 'theowner', true);
   } catch (error) {
-    core.setFailed(error.message);
+    console.log(error.message);
   }
 }
 

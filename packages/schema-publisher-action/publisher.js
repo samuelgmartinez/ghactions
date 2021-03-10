@@ -19,10 +19,15 @@ module.exports.publish = async (pathExpression, s3config, owner, force) => {
     const tenant = path.basename(path.dirname(schemaPath));
     const s3key = path.join(s3config.basePath, tenant, fileKey);
 
-    console.log(`Publishing ${schemaPath} into s3://${s3config.basePath}/${s3key}...`);
+    console.log(`Publishing ${schemaPath} into s3://${s3config.bucket}/${s3config.basePath}/${s3key}...`);
 
-    const tags = await s3client.getObjectTagging({Bucket: s3config.bucket, Key: s3key}).promise();
-    const ownerTag = tags.TagSet.filter(tag => tag.Key === 'owner');
+    var ownerTag = null;
+    try {
+      const tags = await s3client.getObjectTagging({Bucket: s3config.bucket, Key: s3key}).promise();
+      ownerTag = tags.TagSet.filter(tag => tag.Key === 'owner');
+    } catch(keyError) { 
+      //throws an error if the key is not found
+    }
 
     // prevents other repositories overwriting the same definitions by mistake
     if (!force && ownerTag && ownerTag[0].Value != owner) {
