@@ -25,32 +25,26 @@ inputs:
     default: 'any-access-token'
   local-secret-key:
     description: 'Ceph secret key for the local environment'
-    required: false
+    required: true
     default: 'any-secret-token'
   dev-access-key:
     description: 'Ceph access key for the dev environment'
-    required: false
-    default: '${{ secrets.DES_LIBDATAX_ACCESSKEY }}'
+    required: true
   dev-secret-key:
     description: 'Ceph secret key for the dev environment'
-    required: false
-    default: '${{ secrets.DES_LIBDATAX_SECRETKEY }}'
+    required: true
   preint-access-key:
     description: 'Ceph access key for the preint environment'
-    required: false
-    default: '${{ secrets.PREINT_LIBDATAX_ACCESSKEY }}'
+    required: true
   preint-secret-key:
     description: 'Ceph secret key for the preint environment'
-    required: false
-    default: '${{ secrets.PREINT_LIBDATAX_SECRETKEY }}'
+    required: true
   pre-access-key:
     description: 'Ceph access key for the pre environment'
-    required: false
-    default: '${{ secrets.PRE_LIBDATAX_ACCESSKEY }}'
+    required: true
   pre-secret-key:
     description: 'Ceph secret key for the pre environment'
-    required: false
-    default: '${{ secrets.PRE_LIBDATAX_SECRETKEY }}'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
