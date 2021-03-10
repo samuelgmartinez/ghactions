@@ -30,12 +30,14 @@ module.exports.publish = async (pathExpression, s3config, owner, force) => {
         Owner found is "${ownerTag[0].Value}" and the expected is "${owner}". Take a look at the ${ownerTag[0].Value} repository...`);
     }
 
-    return s3client.putObject({
+    await s3client.putObject({
       Bucket: s3config.bucket,
       Key: s3key,
       Tagging: `owner=${owner}`,
       Body: fs.readFileSync(schemaPath),
       ACL: 'private',
     }).promise();
+
+    console.log(`${schemaPath} published successfully.`);
   }
 }
