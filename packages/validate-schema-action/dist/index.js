@@ -2299,7 +2299,6 @@ async function run() {
       core.setOutput('failed-schemas', result.failedSchemas);
     }
   } catch (error) {
-    console.log(`An error occurred: ${error.message}`);
     core.setFailed(error.message);
   }
 }
