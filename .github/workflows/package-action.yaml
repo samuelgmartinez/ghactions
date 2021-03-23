@@ -54,7 +54,9 @@ jobs:
           branch: release/package-js-actions-${{ github.run_id }}
       - name: Open Pull Request with packed JSs
         if: steps.commitPackedJs.outcome == 'success'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
-          echo "mytoken $GITHUB_TOKEN"
-          gh pr create --base ${{ steps.extractBranch.outputs.branch }} --head release/package-js-actions-${{ github.run_id }} --title "Packed JSs from build ${{ github.run_id }}" --body "PR created automatically from job ${{ github.run_id }}" 
+          created_pr=$(gh pr create --base ${{ steps.extractBranch.outputs.branch }} --head release/package-js-actions-${{ github.run_id }} --title "Packed JSs from build ${{ github.run_id }}" --body "PR created automatically from job ${{ github.run_id }}")
+          sleep 5 # yay!
+          gh pr merge ${create_pr} --merge
