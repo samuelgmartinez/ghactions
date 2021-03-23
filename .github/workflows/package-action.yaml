@@ -57,4 +57,4 @@ jobs:
         run: |
           export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
           echo "mytoken $GITHUB_TOKEN"
-          gh pr create --title "Packed JSs from build ${{ github.run_id }}" --body "PR created automatically from job ${{ github.run_id }}" --base ${{ steps.extractBranch.outputs.branch }}
+          gh pr create --base ${{ steps.extractBranch.outputs.branch }} --head release/package-js-actions-${{ github.run_id }} --title "Packed JSs from build ${{ github.run_id }}" --body "PR created automatically from job ${{ github.run_id }}" 
