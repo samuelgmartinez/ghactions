@@ -58,6 +58,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          created_pr=$(gh pr create --base ${{ steps.extractBranch.outputs.branch }} --head ${{ env.RELEASE_BRANCH }} --title "Packed JSs from build ${{ github.run_id }}" --body "PR created automatically from job ${{ github.run_id }}")
+          created_pr=$(gh pr create --base ${{ steps.extractBranch.outputs.branch }} --head ${{ env.RELEASE_BRANCH }} --title "Packed JSs from build ${{ github.run_number }}" --body "PR created automatically from job ${{ github.run_number }}")
           sleep 5 # yay!
           gh pr merge ${create_pr} --merge
