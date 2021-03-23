@@ -50,7 +50,7 @@ async function run() {
       basePath: s3env.basePath
     }
 
-    console.log('Test message2');
+    console.log('Test message3');
 
     await publisher.publish(pathExpr, s3config, core.getInput('owner'), core.getInput('force') == 'true');
   } catch (error) {
