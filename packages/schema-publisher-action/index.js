@@ -50,6 +50,8 @@ async function run() {
       basePath: s3env.basePath
     }
 
+    console.log('Test message');
+
     await publisher.publish(pathExpr, s3config, core.getInput('owner'), core.getInput('force') == 'true');
   } catch (error) {
     console.log(`An error occurred publishing the schemas: ${error.message}`);
